@@ -35,6 +35,7 @@ public class Cell : MonoBehaviour
         if (isMine)
         {
             SetColor(Color.red); //turn mine red
+            IdentifyAmountofMines();
         }    
         else
         {
@@ -53,7 +54,7 @@ public class Cell : MonoBehaviour
     }
     public void IdentifyAmountofMines()
     {
-
+        
     }
 
 }
