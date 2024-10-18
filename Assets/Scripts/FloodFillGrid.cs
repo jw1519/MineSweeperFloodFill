@@ -76,4 +76,32 @@ public class FloodFillGrid : MonoBehaviour
         if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight && !grid[x, y].isRevealed && !grid[x, y].isMine)
             stack.Push(grid[x, y]);
     }
+    public int GetAdjacentMineCount(int x, int y)
+    {
+        int mineCount = 0;
+
+        //loop over the surroundi8ung 8 cells (including diagonal)
+        for (int dx = -1; dx <= 1; dx++)
+        {
+            for (int dy = -1; dy <= 1; dy++)
+            {
+                //skip current cell
+                if (dx == 0 && dy == 0) continue;
+
+                int checkX = x + dx;
+                int checkY = y + dy;
+
+                //check if neighboring cells are within the bounds
+                if (checkX >= 0 && checkX <  gridWidth && checkY >= 0 && checkY < gridHeight)
+                {
+                    //if the cell is a mine, increase the count
+                    if (grid[checkX, checkY].isMine)
+                    {
+                        mineCount++;
+                    }
+                }    
+            }
+        }
+        return mineCount;
+    }
 }

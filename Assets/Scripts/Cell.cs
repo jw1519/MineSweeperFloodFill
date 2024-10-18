@@ -16,7 +16,7 @@ public class Cell : MonoBehaviour
     private TextMeshProUGUI textMesh;
     private void Start()
     {
-        //SetColor(Color.white);
+        SetColor(Color.white);
         textMesh = gameObject.GetComponentInChildren<TextMeshProUGUI>();
         textMesh.SetText("");
     }
@@ -35,7 +35,6 @@ public class Cell : MonoBehaviour
         if (isMine)
         {
             SetColor(Color.red); //turn mine red
-            IdentifyAmountofMines();
         }    
         else
         {
@@ -47,14 +46,18 @@ public class Cell : MonoBehaviour
         isRevealed = true;
         SetColor(Color.grey); //change color when revealed
         textMesh.SetText(amountOfMines.ToString());
+
+        //get ajasent mines
+        int adjacentMines = gridManager.GetAdjacentMineCount(x, y);
+
+        if (adjacentMines > 0)
+        {
+            textMesh.SetText(adjacentMines.ToString());
+        }
     }
     public void SetColor(Color color)
     {
         spriteRenderer.color = color;
-    }
-    public void IdentifyAmountofMines()
-    {
-        
     }
 
 }
